@@ -1,0 +1,115 @@
+## Launching Sublime from command-line ##
+
+# Windows
+
+Find the directory where Sublime is located for you.  For many people, this is C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe.  To test this, run dir "C:/Program\ Files/Sublime\ Text\ 2" within Git Bash.  You should see sublime_text.exe listed.  If you get the error No such file or directory, Sublime is located somewhere else for you and you'll need to find it.  For example, it might be under C:/Program\ Files\ \(x86\).
+
+Run the following command in Git Bash: echo 'alias subl="C:/Program\ Files/Sublime\ Text\ 2/sublime_text.exe"' >> ~/.bashrc If Sublime was in a different directory for you in step 1, use that directory.
+
+Close and re-open Git Bash.
+
+Type subl in Git Bash. If Sublime opens no further steps are required. If Sublime does not open continue with steps 5 - 7.
+
+Test .bashrc by running the command source ~/.bashrc in Git Bash and retry typing subl to start sublime. If Sublime doesn't start check the contents of the file ~/.bashrc created in step 2.
+
+To ensure the .bashrc file contents is loaded each time you open Git Bash, edit ~/.bash_profile and add the following two lines. (Reference)
+
+if [ -r ~/.profile ]; then . ~/.profile; fi
+
+case "$-" in *i*) if [ -r ~/.bashrc ]; then . ~/.bashrc; fi;; esac
+
+Close and re-open Git Bash. Type subl in Git Bash to check it starts correctly.
+
+# Mac
+
+Find where the subl command is located.
+subl comes with Sublime, so it should be in the directory where Sublime is located for you.  For many people, this is /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin.  To test this, run ls /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin.  You should see the subl command listed.  If you get the error No such file or directory, Sublime is located somewhere else for you and you'll need to find it.
+If you are using Sublime v3, it may be located here: /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/
+
+If you do not have a file named .bash_profile in your home directory, create it.  Because the name of this file begins with a period, it will not appear in most file navigators or when you run ls.  Instead, run ls -a to see if you have the file.
+
+Add the line export PATH=$PATH:/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin to the end of your .bash_profile.  If subl was in a different directory for you in step 1, use that directory.
+
+Close and re-open your terminal.  Typing subl in the terminal should now open Sublime.
+
+Alternatively, you can create a symbolic link to Sublime.
+
+Find where the subl command is located.
+subl comes with Sublime, so it should be in the directory where Sublime is located for you.  For many people, this is /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin.  To test this, run ls /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin.  You should see the subl command listed.  If you get the error No such file or directory, Sublime is located somewhere else for you and you'll need to find it.
+
+If you do not have a file named .bash_profile in your home directory, create it.  Because the name of this file begins with a period, it will not appear in most file navigators or when you run ls.  Instead, run ls -a to see if you have the file.
+
+Add the lines export PATH=/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
+and
+export EDITOR='subl -w' to the end of your .bash_profile.
+
+Save and exit .bash_profile.
+
+At the terminal command prompt type: source ~/.bash_profile
+
+At the terminal command prompt type: sudo ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl Note that if subl was in a different directory for you in step 1, use the path to that directory. If prompted for a password, use the same password you use to log into your Mac account.
+
+Close and re-open your terminal.  Typing subl in the terminal should now open Sublime.
+
+-------------------------------------------------------
+
+Git is a british synonym for "unpleasant person"
+
+In Git terminology, user created checkpoints are called commits.
+Commits are the basic building blocks of Git, each one representing a version of the content at one point in time.
+Git requires the user to supply commit messages each time a commit is created.
+This makes looking through old versions much more useful and pleasant, provided that the user supplied a useful commit message.
+
+Version Control: Any system that allows for systematic versioning of content.
+That is anything that makes it easy to create, store and access different versions of the same documents, codes, recipes, etc..
+
+The command "git log"  shows a log of every commit ever made.
+Every commit shows a unique ID, a author, a date & a message .
+The command "git log --stat" also shows the number of insertions & deletions
+
+The command "git diff" takes two commits and compares them to each other, similar to the diff command.
+
+
+How Often to Commit
+Since you can choose when to make a commit, you might be wondering how often to commit your changes. It's usually a good idea to keep commits small. As the diff between two versions gets bigger, it gets harder to understand and less useful. However, you don’t want to make your commits too small either. If you always save a commit every time you change a line of code, your history will be harder to read since it will have a huge number of commits over a short time period.
+
+A good rule of thumb is to make one commit per logical change. For example, if you fixed a typo, then fixed a bug in a separate part of the file, you should use one commit for each change since they are logically separate. If you do this, each commit will have one purpose that can be easily understood. Git allows you to write a short message explaining what was changed in each commit, and that message will be more useful if each commit has a single logical change.
+
+
+Commits with multiple files
+In a project there are often multiple files and in that case it also often makes sense to track them together.
+Git calls such a collection of files a repository.
+A repository is therefore a collection of files that are tracked by Git as a cohesive unit.
+Saving a version of files in Git (making a Commit), saves a version of every file in the repository.
+A commit is a snapshot of every file in the repository at the time the commit is done.
+
+
+Git Checkout
+Is the option to temporarily change the files back to how they were at the time of any commit. It's sort of like restoring a previous version.
+Checking out means reseting all the files to how they were at the time the commit was made.
+
+
+A Git repository stores a bunch of metadata about the history since it was created. It is stored in the a hidden directory inside the repositories main directory.
+-> .git
+
+"git init" initializes a repository
+"git status" shows the files changed since the last commit
+"git add" adds files to the Staging Area
+"git reset" removes files from the Staging Area
+
+The staging area is a file, generally contained in your Git directory, that stores information about what will go into your next commit. It’s sometimes referred to as the “index”, but it’s also common to refer to it as the staging area.
+
+The basic Git workflow goes something like this:
+1. You modify files in your working tree.
+2. You stage the files, adding snapshots of them to your staging area.
+3. You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.
+
+
+"git commit" commits the changes in the staging area into the repository. By default I configured Git to open Atom in order to type the commit message
+
+"git commit -m [Commit Message]" directly adds the commit message without opening Atom
+
+
+git diff -> compares the versions of the working directory and the staging area
+git diff --staged -> compares the versions of the staging area & the repository
+git diff commit1 commit2 -> compares the versions of commit1 and commit2
