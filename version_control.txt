@@ -113,3 +113,47 @@ The basic Git workflow goes something like this:
 git diff -> compares the versions of the working directory and the staging area
 git diff --staged -> compares the versions of the staging area & the repository
 git diff commit1 commit2 -> compares the versions of commit1 and commit2
+
+
+## Branches
+Making a straight line of changes & therefore creating a linear commit history makes a lot of sense for fixing bugs, adding new features or updating documentations.
+However trying out an experimental feature and keeping a working demo at the same time calls for the option create a commit history that branches out into multiple versions.
+
+Git allows to create labels to commits. Those labels are called branches.
+Master is the name given to the main branch in most Git repositories and every time a repository is created, Git creates a master branch.
+
+
+git branch -> view & create branches
+git branch easy-mode -> adding an argument to git branch creates a new branch with name of the argument
+
+
+Good practice is to have the master branch the production quality branch that never breaks, always works. Then there could be a development branch where active work is done. Also experimental or unique feature branches might make sense.
+
+
+git log --graph [name of the branch] -> visualize the commit structure
+git log --graph --oneline [name of the branch] -> output is easier to see & shorter
+
+
+## Detached HEAD message
+Head in Git terminology means current commit. Commits as well as branches can be checked out. The detached head message appears if a commit is checked out.
+
+git checkout -b new_branch_name
+-> This is equivalent to two commands
+1. git branch new_branch_name
+2. git checkout new_branch_name
+
+
+## Merging branches
+Combine changes from multiple branches into a single version.
+
+If a branch is deleted and leaves some commits unreachable from existing branches, those commits will continue to be accessible by commit id, until Git’s garbage collection runs. This will happen automatically from time to time, unless you actively turn it off. You can also run this process manually with git gc.
+
+git merge master coins -> creates a merged version of the two branches. If the branch master is checked out, then the branch coins will be merged into the branch master.
+
+git show -> shows the changes that were introduced by a commit compared to it's parent
+
+git branch -d coins -> deletes the branch coins, where d stands for delete. This won't delete the commits in the branch, it only deletes the label.
+
+
+## GitHub
+A website that makes it easy to share entire git repository with other people
