@@ -156,4 +156,45 @@ git branch -d coins -> deletes the branch coins, where d stands for delete. This
 
 
 ## GitHub
-A website that makes it easy to share entire git repository with other people
+A website that makes it easy to share entire git repository with other people. GitHub aim to promote open source by allowing anyone to host public repositories for free and charging private repositories.
+Many companies use Git to keep track of their changes to their proprietary code and use GitHub to host a private copy of their repository.
+
+Password Caching
+Every time you send changes to GitHub via the command line, you'll need to type your password to prove that you have permission to modify the repository. This can get annoying quickly, so many people like to set up password caching, which will let you type your password once and have it auto-filled on that computer in the future. To do this, follow the instructions on https://help.github.com/articles/caching-your-github-password-in-git/. If you're using Windows and you followed our Git installation instructions earlier, you're using msysgit, so you can follow the instructions for msysgit.
+
+# Syncing Repositories
+As with many cloud hosted systems this involves syncing between the repository on a local computer and the version hosted on GitHub, which is the version seen on the website.
+
+#############################################            ######################
+# Local                                     #            # GitHub             #
+###################### ###################  #            ###################  #
+# working directory  # # commit history  #  #  push--->  # commit history  #  #
+#                    # #                 #  #            #                 #  #
+###################### #                 #  #  <---pull  #                 #  #
+###################### #                 #  #            #                 #  #
+# staging area       # #                 #  #            #                 #  #
+#                    # #                 #  #            #                 #  #
+###################### ###################  #            #                 #  #
+#############################################            ######################
+
+When interacting with GitHub, the information sent and received is in the form of Git commits, so changes must be staged and commited before they can be sent.
+The working directory and the staging area exist on GitHub as well, but are not directly accessible.
+Unlike many other services that sync with cloud hosted versions of files, when using GitHub, the user has to choose when and how to get the two version in sync.
+If GitHub automatically got updated with the local version after every single commit, things might get public before they are fully ready.
+
+How to sync between the local copy of a repository and the one hosted on GitHub?
+1. How to get the current state of an existing repository on GitHub?
+First an empty repository needs to be created on GitHub
+To allow for syncing data between two repositories, git has a concept of a remote repository. This lets the user store the location of a repository that the user wants to send and receive new commits to and from.
+The most common way to send and receive data is by specifying a branch. All the commits that can be reached by the tip of the branch will be send or received.
+
+git remote -> view & create remotes
+git remote add [name for the remote] [URL] -> adds a repository on GitHub as a remote
+
+Any name for the remote can be used. This name is the name being used to refer to the repository on GitHub. If there is only one remote it is standard to name it origin.
+
+git remote -v -> V stands for verbose & means that git remote will output more information
+
+git push [the remote where changes should be send to] [branch] -> sends changes to the remote
+
+TEst Tets
