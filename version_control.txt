@@ -196,5 +196,3 @@ Any name for the remote can be used. This name is the name being used to refer t
 git remote -v -> V stands for verbose & means that git remote will output more information
 
 git push [the remote where changes should be send to] [branch] -> sends changes to the remote
-
-TEst Tets
